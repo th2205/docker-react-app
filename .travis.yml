@@ -1,0 +1,16 @@
+sudo: required
+
+language: generic
+
+sevices:
+  - docker
+
+before_install:
+  - echo "start"
+  - docker build -t thlim/react-app -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true thlim/react-app npm test run -- --coverage
+
+after_install:
+  - echo "end"
