@@ -12,5 +12,14 @@ before_install:
 script:
   - docker run -e CI=true thlim/react-app npm run test -- --coverage
 
-after_install:
-  - echo "end"
+deploy:
+  provider: elasticbeanstalk
+  region: ap-northeast-2
+  app: docker-react-app
+  env: DockerReactApp-env
+  bucker_name: elasticbeanstalk-ap-northeast-2-313872133743
+  bucker_name: docker-react-app
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
